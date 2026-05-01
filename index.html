@@ -397,12 +397,13 @@
     .brand-accordion { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 2rem; }
     .brand-item { border: 1px solid var(--border-sub); border-radius: var(--radius); overflow: hidden; background: var(--bg-card); transition: border-color 0.25s; }
     .brand-item.open { border-color: var(--border); }
-    .brand-tab { width: 100%; background: none; border: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.5rem; gap: 1rem; }
-    .brand-logo-box { width: 140px; height: 44px; display: flex; align-items: center; justify-content: flex-end; flex-shrink: 0; }
-    .brand-logo { max-width: 140px; max-height: 44px; width: 140px; height: 44px; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.85; }
-    .brand-divider { flex: 1; height: 1px; background: var(--border-sub); }
-    .brand-chevron { color: var(--wine-light); font-size: 0.95rem; transition: transform 0.35s cubic-bezier(0.22,1,0.36,1); flex-shrink: 0; }
-    .brand-item.open .brand-chevron { transform: rotate(180deg); }
+    .brand-tab { width: 100%; background: none; border: none; cursor: pointer; display: flex; align-items: center; justify-content: flex-end; padding: 1rem 1.5rem; gap: 0.75rem; }
+    .brand-logo-box { width: 160px; height: 52px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .brand-logo { width: 160px; height: 52px; object-fit: contain; }
+    .brand-chevron { display: inline-block; width: 18px; height: 18px; flex-shrink: 0; transition: transform 0.35s cubic-bezier(0.22,1,0.36,1); transform: rotate(-90deg); }
+    .brand-chevron::before { content: ''; display: block; width: 10px; height: 10px; border-right: 2.5px solid rgba(255,255,255,0.7); border-bottom: 2.5px solid rgba(255,255,255,0.7); transform: rotate(45deg) translate(-3px,-3px); margin: 4px auto 0; }
+    .brand-item.open .brand-chevron { transform: rotate(0deg); }
+    .brand-vframe.wide { flex: 0 0 clamp(220px,40vw,400px); aspect-ratio: 16/9; }
     .brand-panel { max-height: 0; overflow: hidden; transition: max-height 0.45s cubic-bezier(0.22,1,0.36,1); }
     .brand-item.open .brand-panel { max-height: 800px; }
     .brand-videos-row { display: flex; direction: ltr; gap: 0.75rem; overflow-x: auto; padding: 0.5rem 1.25rem 1.25rem; scrollbar-width: thin; scrollbar-color: var(--wine) transparent; }
@@ -1083,14 +1084,53 @@
     <div class="container">
       <div class="label reveal">פורטפוליו</div>
       <h2 class="reveal delay-1">עבודות של הראל</h2>
-      <p class="section-sub reveal delay-2">לחצו על המותג לצפייה בסרטונים</p>
       <div class="brand-accordion reveal delay-2">
 
         <div class="brand-item">
           <button class="brand-tab" onclick="toggleBrand(this)">
+            <div class="brand-logo-box"><img src="logos/knesset.png" class="brand-logo" alt="הכנסת"></div>
+<span class="brand-chevron"></span>
+          </button>
+          <div class="brand-panel"><div class="brand-videos-row">
+            <div class="brand-vframe wide"><div class="vid-facade" data-id="1188369124"><div class="play-circle"><i class="fa-solid fa-play"></i></div></div></div>
+            <div class="brand-vframe wide"><div class="vid-facade" data-id="1188369009"><div class="play-circle"><i class="fa-solid fa-play"></i></div></div></div>
+          </div></div>
+        </div>
+
+        <div class="brand-item">
+          <button class="brand-tab" onclick="toggleBrand(this)">
+            <div class="brand-logo-box"><img src="logos/de-rococo.png" class="brand-logo" alt="DÉ ROCOCO"></div>
+<span class="brand-chevron"></span>
+          </button>
+          <div class="brand-panel"><div class="brand-videos-row">
+            <div class="brand-vframe wide"><div class="vid-facade" data-id="1188369884"><div class="play-circle"><i class="fa-solid fa-play"></i></div></div></div>
+          </div></div>
+        </div>
+
+        <div class="brand-item">
+          <button class="brand-tab" onclick="toggleBrand(this)">
+            <div class="brand-logo-box"><img src="logos/ICONIX.png" class="brand-logo" alt="ICONIX"></div>
+<span class="brand-chevron"></span>
+          </button>
+          <div class="brand-panel"><div class="brand-videos-row">
+            <div class="brand-vframe"><div class="vid-facade" data-id="1188395308"><div class="play-circle"><i class="fa-solid fa-play"></i></div></div></div>
+          </div></div>
+        </div>
+
+        <div class="brand-item">
+          <button class="brand-tab" onclick="toggleBrand(this)">
+            <div class="brand-logo-box"><img src="logos/baladi.png" class="brand-logo" alt="BALADI"></div>
+<span class="brand-chevron"></span>
+          </button>
+          <div class="brand-panel"><div class="brand-videos-row">
+            <div class="brand-vframe"><div class="vid-facade" data-id="1188368867"><div class="play-circle"><i class="fa-solid fa-play"></i></div></div></div>
+          </div></div>
+        </div>
+
+        <div class="brand-item">
+          <button class="brand-tab" onclick="toggleBrand(this)">
             <div class="brand-logo-box"><img src="logos/GOOM.png" class="brand-logo" alt="GOOM"></div>
-            <div class="brand-divider"></div>
-            <i class="fa-solid fa-chevron-down brand-chevron"></i>
+<span class="brand-chevron"></span>
           </button>
           <div class="brand-panel"><div class="brand-videos-row">
             <div class="brand-vframe"><div class="vid-facade" data-id="1188370159"><div class="play-circle"><i class="fa-solid fa-play"></i></div></div></div>
@@ -1102,68 +1142,21 @@
 
         <div class="brand-item">
           <button class="brand-tab" onclick="toggleBrand(this)">
-            <div class="brand-logo-box"><img src="logos/knesset.png" class="brand-logo" alt="הכנסת"></div>
-            <div class="brand-divider"></div>
-            <i class="fa-solid fa-chevron-down brand-chevron"></i>
+            <div class="brand-logo-box"><img src="logos/HARMONY.png" class="brand-logo" alt="HARMONY"></div>
+<span class="brand-chevron"></span>
           </button>
           <div class="brand-panel"><div class="brand-videos-row">
-            <div class="brand-vframe"><div class="vid-facade" data-id="1188369124"><div class="play-circle"><i class="fa-solid fa-play"></i></div></div></div>
-            <div class="brand-vframe"><div class="vid-facade" data-id="1188369009"><div class="play-circle"><i class="fa-solid fa-play"></i></div></div></div>
-          </div></div>
-        </div>
-
-        <div class="brand-item">
-          <button class="brand-tab" onclick="toggleBrand(this)">
-            <div class="brand-logo-box"><img src="logos/baladi.png" class="brand-logo" alt="BALADI"></div>
-            <div class="brand-divider"></div>
-            <i class="fa-solid fa-chevron-down brand-chevron"></i>
-          </button>
-          <div class="brand-panel"><div class="brand-videos-row">
-            <div class="brand-vframe"><div class="vid-facade" data-id="1188368867"><div class="play-circle"><i class="fa-solid fa-play"></i></div></div></div>
+            <div class="brand-vframe"><div class="vid-facade" data-id="1188397317"><div class="play-circle"><i class="fa-solid fa-play"></i></div></div></div>
           </div></div>
         </div>
 
         <div class="brand-item">
           <button class="brand-tab" onclick="toggleBrand(this)">
             <div class="brand-logo-box"><img src="logos/A3RO.png" class="brand-logo" alt="A3RO"></div>
-            <div class="brand-divider"></div>
-            <i class="fa-solid fa-chevron-down brand-chevron"></i>
+<span class="brand-chevron"></span>
           </button>
           <div class="brand-panel"><div class="brand-videos-row">
-            <div class="brand-vframe"><div class="vid-facade" data-id="1188369349"><div class="play-circle"><i class="fa-solid fa-play"></i></div></div></div>
-          </div></div>
-        </div>
-
-        <div class="brand-item">
-          <button class="brand-tab" onclick="toggleBrand(this)">
-            <div class="brand-logo-box"><img src="logos/ICONIX.png" class="brand-logo" alt="ICONIX"></div>
-            <div class="brand-divider"></div>
-            <i class="fa-solid fa-chevron-down brand-chevron"></i>
-          </button>
-          <div class="brand-panel"><div class="brand-videos-row">
-            <div class="brand-vframe"><div class="vid-facade" data-id="1188395308"><div class="play-circle"><i class="fa-solid fa-play"></i></div></div></div>
-          </div></div>
-        </div>
-
-        <div class="brand-item">
-          <button class="brand-tab" onclick="toggleBrand(this)">
-            <div class="brand-logo-box"><img src="logos/de-rococo.png" class="brand-logo" alt="DÉ ROCOCO"></div>
-            <div class="brand-divider"></div>
-            <i class="fa-solid fa-chevron-down brand-chevron"></i>
-          </button>
-          <div class="brand-panel"><div class="brand-videos-row">
-            <div class="brand-vframe"><div class="vid-facade" data-id="1188369884"><div class="play-circle"><i class="fa-solid fa-play"></i></div></div></div>
-          </div></div>
-        </div>
-
-        <div class="brand-item">
-          <button class="brand-tab" onclick="toggleBrand(this)">
-            <div class="brand-logo-box"><img src="logos/HARMONY.png" class="brand-logo" alt="HARMONY"></div>
-            <div class="brand-divider"></div>
-            <i class="fa-solid fa-chevron-down brand-chevron"></i>
-          </button>
-          <div class="brand-panel"><div class="brand-videos-row">
-            <div class="brand-vframe"><div class="vid-facade" data-id="1188397317"><div class="play-circle"><i class="fa-solid fa-play"></i></div></div></div>
+            <div class="brand-vframe wide"><div class="vid-facade" data-id="1188369349"><div class="play-circle"><i class="fa-solid fa-play"></i></div></div></div>
           </div></div>
         </div>
 
