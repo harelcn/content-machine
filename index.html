@@ -649,6 +649,11 @@
     .inc { display: flex; align-items: center; gap: 0.6rem; padding: 0.38rem 0; font-size: 0.9rem; color: var(--text-muted); }
     .inc .ck { color: var(--wine-light); font-size: 0.85rem; }
     .price-note { font-size: 0.76rem; color: var(--text-dim); margin-top: 0.85rem; }
+    .policy-check { display: flex; align-items: flex-start; gap: 0.6rem; margin: 1rem 0 1.1rem; justify-content: center; }
+    .policy-check input[type="checkbox"] { width: 18px; height: 18px; min-width: 18px; accent-color: var(--wine); cursor: pointer; margin-top: 2px; }
+    .policy-check label { font-size: 0.88rem; color: var(--text-muted); cursor: pointer; line-height: 1.5; font-weight: 700; }
+    .policy-link { color: var(--wine-light); font-weight: 900; text-decoration: underline; }
+    .policy-link:hover { opacity: 0.8; }
 
     /* ===== FAQ ===== */
     .faq-list { max-width: 660px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.7rem; }
@@ -855,7 +860,7 @@
         בלי לצלם, בלי לשלם ליוצרים, ובלי להיות תלויים באף אחד
       </p>
       <div class="hero-actions reveal delay-3">
-        <a href="https://my.schooler.biz/s/109519/1770273554967/lbdUjdo" target="_blank" rel="noopener" class="btn btn-primary lg">אני בפנים — ₪297</a>
+        <a href="#pricing" class="btn btn-primary lg">אני בפנים — ₪297</a>
         <a href="#curriculum" class="btn btn-ghost">ראו את תוכן הקורס</a>
       </div>
       <p class="hero-note reveal delay-4"><i class="fa-solid fa-circle-check" style="color:var(--wine-light);margin-left:0.35rem;"></i>תוצאות תוך 24 שעות — מובטח</p>
@@ -1224,7 +1229,11 @@
           <div class="inc"><i class="fa-solid fa-check ck"></i> קבוצת WhatsApp תמיכה</div>
           <div class="inc"><i class="fa-solid fa-check ck"></i> עדכונים עתידיים</div>
         </div>
-        <a href="https://my.schooler.biz/s/109519/1770273554967/lbdUjdo" target="_blank" rel="noopener" class="btn btn-primary lg full">הצטרפו עכשיו — אני בפנים</a>
+        <div class="policy-check">
+          <input type="checkbox" id="policy-agree">
+          <label for="policy-agree">אני מאשר את <a href="מדיניות/privacy-policy-ai-course.md.pdf" target="_blank" class="policy-link">מדיניות הפרטיות</a> וה<a href="מדיניות/cancellation-policy-ai-course.md.pdf" target="_blank" class="policy-link">ביטולים</a></label>
+        </div>
+        <a href="#" class="btn btn-primary lg full">הצטרפו עכשיו — אני בפנים</a>
         <p class="price-note">תשלום מאובטח · גישה מיידית · תמיכה בעברית</p>
       </div>
     </div>
@@ -1261,7 +1270,7 @@
     <div class="container">
       <h2 class="reveal">תוך 24 שעות אתם כבר יכולים להיות שם</h2>
       <p class="reveal delay-1">90% מהשוק עוד לא שם. השאלה היא האם תהיו בצד הנכון</p>
-      <a href="https://my.schooler.biz/s/109519/1770273554967/lbdUjdo" target="_blank" rel="noopener" class="btn btn-primary lg reveal delay-2">כן, אני רוצה — אני בפנים</a>
+      <a href="#pricing" class="btn btn-primary lg reveal delay-2">כן, אני רוצה — אני בפנים</a>
     </div>
   </section>
 
@@ -1272,7 +1281,7 @@
 
   <!-- MOBILE STICKY -->
   <div class="sticky-bar" id="stickyBar">
-    <a href="https://my.schooler.biz/s/109519/1770273554967/lbdUjdo" target="_blank" rel="noopener" class="btn btn-primary full">אני בפנים — ₪297 בלבד</a>
+    <a href="#pricing" class="btn btn-primary full">אני בפנים — ₪297 בלבד</a>
   </div>
 
   <script>
