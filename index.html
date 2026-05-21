@@ -1565,5 +1565,249 @@
     });
   </script>
   <script src="https://player.vimeo.com/api/player.js" defer></script>
+
+  <!-- ACCESSIBILITY WIDGET -->
+  <div id="a11y-filter-overlay"></div>
+  <div id="a11y-reading-guide" aria-hidden="true"></div>
+  <button id="a11y-btn" aria-label="פתח תפריט נגישות" aria-expanded="false" title="נגישות">&#9855;</button>
+  <div id="a11y-panel" role="dialog" aria-label="תפריט נגישות" dir="rtl" hidden>
+    <div id="a11y-top">
+      <span id="a11y-hint">ניתן להשתמש בחצי המקלדת בכדי לנוע בין הכפתורים</span>
+      <button id="a11y-esc-btn" onclick="a11yClose()">ESC</button>
+    </div>
+    <div id="a11y-opts">
+      <button class="a11y-opt" data-a="readable-font"><span class="a11y-ico" style="font-family:serif;">A</span><span class="a11y-lbl">גופן קריא</span></button>
+      <button class="a11y-opt" data-a="bold-text"><span class="a11y-ico"><b>A</b></span><span class="a11y-lbl">חיזוק קבוע</span></button>
+      <button class="a11y-opt" data-a="img-desc"><span class="a11y-ico">🖼</span><span class="a11y-lbl">תיאור תמונה</span></button>
+      <button class="a11y-opt" data-a="links"><span class="a11y-ico">🔗</span><span class="a11y-lbl">הדגשת קישורים</span></button>
+      <button class="a11y-opt" data-a="headings"><span class="a11y-ico"><b>H</b></span><span class="a11y-lbl">הדגשת כותרות</span></button>
+      <button class="a11y-opt" data-a="invert"><span class="a11y-ico">◑</span><span class="a11y-lbl">היפוך צבעים</span></button>
+      <button class="a11y-opt" data-a="black-yellow"><span class="a11y-ico a11y-by-ico">■</span><span class="a11y-lbl">שחור צהוב</span></button>
+      <button class="a11y-opt" data-a="high-contrast"><span class="a11y-ico">◐</span><span class="a11y-lbl">ניגודיות גבוהה</span></button>
+      <button class="a11y-opt" data-a="reading-guide"><span class="a11y-ico">▬</span><span class="a11y-lbl">סיפה</span></button>
+      <button class="a11y-opt" data-a="mono"><span class="a11y-ico" style="filter:grayscale(1);">●</span><span class="a11y-lbl">מונוכרום</span></button>
+      <button class="a11y-opt" data-a="no-anim"><span class="a11y-ico">⊘</span><span class="a11y-lbl">ביטול הבהובים</span></button>
+      <button class="a11y-opt" data-a="keyboard-nav"><span class="a11y-ico">⌨</span><span class="a11y-lbl">ניווט מקלדת</span></button>
+    </div>
+    <div id="a11y-row2">
+      <button class="a11y-opt" onclick="a11yFontSize(-1)"><span class="a11y-ico">A↓</span><span class="a11y-lbl">הקטנת גופן</span></button>
+      <button class="a11y-opt" onclick="a11yFontSize(1)"><span class="a11y-ico">A↑</span><span class="a11y-lbl">הגדלת גופן</span></button>
+      <button class="a11y-opt" onclick="a11yZoom(-1)"><span class="a11y-ico">⊖</span><span class="a11y-lbl">הקטנת מסך</span></button>
+      <button class="a11y-opt" onclick="a11yZoom(1)"><span class="a11y-ico">⊕</span><span class="a11y-lbl">הגדלת מסך</span></button>
+      <button class="a11y-opt" data-a="big-cursor"><span class="a11y-ico" style="font-size:1.6rem;">↖</span><span class="a11y-lbl">סמן גדול</span></button>
+      <button class="a11y-opt" data-a="dark-cursor"><span class="a11y-ico" style="color:#000;text-shadow:0 0 2px #fff;">↖</span><span class="a11y-lbl">סמן שחור</span></button>
+    </div>
+  </div>
+
+  <style>
+  #a11y-reading-guide {
+    position: fixed; top: 0; left: 0; width: 100%; height: 32px;
+    background: rgba(255,220,0,0.28);
+    border-top: 2px solid rgba(200,160,0,0.5);
+    border-bottom: 2px solid rgba(200,160,0,0.5);
+    pointer-events: none; z-index: 99990; display: none;
+  }
+  #a11y-btn {
+    position: fixed; bottom: 90px; left: 20px;
+    width: 52px; height: 52px; border-radius: 50%;
+    background: #8B2035; color: #F8EEF0;
+    border: 2px solid rgba(248,238,240,0.4); cursor: pointer;
+    font-size: 1.55rem; line-height: 1; display: flex; align-items: center; justify-content: center;
+    z-index: 99998; box-shadow: 0 4px 18px rgba(0,0,0,0.5);
+    transition: transform 0.2s, background 0.2s;
+    font-family: Arial, sans-serif;
+  }
+  #a11y-btn:hover { background: #6e1829; transform: scale(1.1); }
+  #a11y-panel {
+    position: fixed; bottom: 156px; left: 10px;
+    width: 730px; max-width: calc(100vw - 20px);
+    background: #1e0d12; border: 1px solid rgba(139,32,53,0.4);
+    border-radius: 14px; box-shadow: 0 10px 50px rgba(0,0,0,0.7);
+    z-index: 99997; direction: rtl; overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  #a11y-top {
+    background: #8B2035; color: #F8EEF0;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.55rem 1rem; gap: 1rem; direction: rtl;
+  }
+  #a11y-hint { font-size: 0.78rem; opacity: 0.9; font-weight: 400; }
+  #a11y-esc-btn {
+    background: rgba(0,0,0,0.3); color: #F8EEF0;
+    border: 1px solid rgba(248,238,240,0.4); border-radius: 6px;
+    padding: 0.2rem 0.7rem; cursor: pointer; font-size: 0.78rem; font-weight: 700; flex-shrink: 0;
+  }
+  #a11y-esc-btn:hover { background: rgba(0,0,0,0.5); }
+  #a11y-opts, #a11y-row2 {
+    display: flex; flex-wrap: wrap; gap: 7px; padding: 11px; direction: rtl;
+  }
+  #a11y-row2 { border-top: 1px solid rgba(139,32,53,0.3); }
+  .a11y-opt {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 5px; width: calc((100% - 77px) / 6); min-width: 68px;
+    min-height: 70px; background: #160810; border: 1px solid rgba(139,32,53,0.35);
+    border-radius: 9px; cursor: pointer; padding: 8px 4px;
+    font-family: Arial, Helvetica, sans-serif; font-weight: 600;
+    transition: border-color 0.15s, background 0.15s, transform 0.15s; color: #c8a8b0;
+  }
+  .a11y-opt:hover { border-color: #8B2035; background: #2a0e18; transform: translateY(-2px); color: #F8EEF0; }
+  .a11y-opt:focus { outline: 2px solid #c8455a; outline-offset: 2px; }
+  .a11y-opt.a11y-active { background: #8B2035; border-color: #c8455a; color: #fff; }
+  .a11y-opt.a11y-active .a11y-ico { color: #fff !important; filter: none !important; }
+  .a11y-ico {
+    font-size: 1.4rem; display: flex; align-items: center; justify-content: center;
+    height: 30px; color: inherit; font-weight: 700; font-family: Arial, sans-serif; line-height: 1;
+  }
+  .a11y-lbl { font-size: 0.61rem; text-align: center; line-height: 1.25; color: inherit; font-weight: 600; }
+  .a11y-by-ico { color: #FFE000; }
+  .a11y-alt {
+    display: inline-block; background: #8B2035; color: #fff !important;
+    font-size: 0.68rem; padding: 1px 5px; border-radius: 3px;
+    vertical-align: middle; max-width: 110px; overflow: hidden;
+    text-overflow: ellipsis; white-space: nowrap; font-weight: 400 !important;
+  }
+  /* === EFFECT CLASSES === */
+  body.a11y-readable-font, body.a11y-readable-font * { font-family: Arial, Helvetica, sans-serif !important; }
+  body.a11y-bold-text * { font-weight: 900 !important; }
+  body.a11y-links a { outline: 3px solid #e63946 !important; background: #ffe066 !important; color: #000 !important; padding: 0 3px !important; border-radius: 3px !important; }
+  body.a11y-headings h1, body.a11y-headings h2, body.a11y-headings h3,
+  body.a11y-headings h4, body.a11y-headings h5, body.a11y-headings h6 {
+    outline: 2px solid #8B2035 !important; background: rgba(139,32,53,0.15) !important;
+    border-radius: 4px !important; padding: 2px 8px !important;
+  }
+  #a11y-filter-overlay { position: fixed; inset: 0; pointer-events: none; z-index: 99994; display: none; }
+  #a11y-filter-overlay.invert { display: block; background: #fff; mix-blend-mode: difference; }
+  #a11y-filter-overlay.mono { display: block; backdrop-filter: grayscale(1); -webkit-backdrop-filter: grayscale(1); }
+  body.a11y-black-yellow { background: #000 !important; }
+  body.a11y-black-yellow *:not(#a11y-btn):not(#a11y-panel):not(#a11y-panel *) { background-color: #000 !important; color: #FFE000 !important; border-color: #FFE000 !important; }
+  body.a11y-black-yellow img, body.a11y-black-yellow video, body.a11y-black-yellow iframe { filter: grayscale(1) brightness(0.7); }
+  body.a11y-high-contrast *:not(#a11y-btn):not(#a11y-panel):not(#a11y-panel *) { background-color: #000 !important; color: #fff !important; border-color: #fff !important; }
+  body.a11y-high-contrast img, body.a11y-high-contrast iframe { filter: grayscale(1) contrast(1.8); }
+  body.a11y-no-anim *, body.a11y-no-anim *::before, body.a11y-no-anim *::after { animation: none !important; transition: none !important; }
+  body.a11y-keyboard-nav *:focus { outline: 4px solid #c8455a !important; outline-offset: 3px !important; box-shadow: 0 0 0 7px rgba(200,69,90,0.25) !important; }
+  body.a11y-big-cursor, body.a11y-big-cursor * {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 44 44'%3E%3Cpath d='M6 2L6 34L13 26L20 40L25 37L18 23L30 23Z' fill='white' stroke='black' stroke-width='2.5' stroke-linejoin='round'/%3E%3C/svg%3E") 6 2, auto !important;
+  }
+  body.a11y-dark-cursor, body.a11y-dark-cursor * {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Cpath d='M5 2L5 28L11 21L17 34L21 32L15 19L24 19Z' fill='black' stroke='white' stroke-width='1.8' stroke-linejoin='round'/%3E%3C/svg%3E") 5 2, auto !important;
+  }
+  @media (max-width: 750px) {
+    #a11y-panel { bottom: 0; left: 0; right: 0; width: 100%; max-width: 100%; border-radius: 16px 16px 0 0; max-height: 72vh; overflow-y: auto; }
+    #a11y-btn { bottom: 72px; left: 14px; }
+    .a11y-opt { width: calc(16.666% - 6px); min-width: 52px; min-height: 62px; }
+    .a11y-ico { font-size: 1.15rem; }
+    .a11y-lbl { font-size: 0.55rem; }
+  }
+  </style>
+
+  <script>
+  (function() {
+    var state = {};
+    var fontLevel = 0, zoomLevel = 0;
+    var filterGroup = ['invert','black-yellow','high-contrast','mono'];
+    var cursorGroup = ['big-cursor','dark-cursor'];
+
+    function deactivate(action) {
+      state[action] = false;
+      document.body.classList.remove('a11y-' + action);
+      var b = document.querySelector('[data-a="'+action+'"]');
+      if (b) b.classList.remove('a11y-active');
+    }
+
+    function toggle(action) {
+      if (filterGroup.indexOf(action) !== -1) {
+        filterGroup.forEach(function(f) { if (f !== action && state[f]) deactivate(f); });
+      }
+      if (cursorGroup.indexOf(action) !== -1) {
+        cursorGroup.forEach(function(c) { if (c !== action && state[c]) deactivate(c); });
+      }
+      state[action] = !state[action];
+      document.body.classList.toggle('a11y-' + action, state[action]);
+      var btn = document.querySelector('[data-a="'+action+'"]');
+      if (btn) btn.classList.toggle('a11y-active', state[action]);
+
+      if (action === 'reading-guide') {
+        var guide = document.getElementById('a11y-reading-guide');
+        if (state['reading-guide']) {
+          document.addEventListener('mousemove', moveGuide);
+          guide.style.display = 'block';
+        } else {
+          document.removeEventListener('mousemove', moveGuide);
+          guide.style.display = 'none';
+        }
+      }
+      if (action === 'img-desc') {
+        if (state['img-desc']) {
+          document.querySelectorAll('img').forEach(function(img) {
+            var alt = img.getAttribute('alt');
+            if (alt && alt.trim() && img.parentNode) {
+              var s = document.createElement('span');
+              s.className = 'a11y-alt'; s.textContent = '[' + alt + ']';
+              img.parentNode.insertBefore(s, img.nextSibling);
+            }
+          });
+        } else {
+          document.querySelectorAll('.a11y-alt').forEach(function(el) { el.remove(); });
+        }
+      }
+      var overlay = document.getElementById('a11y-filter-overlay');
+      if (state['invert']) overlay.className = 'invert';
+      else if (state['mono']) overlay.className = 'mono';
+      else overlay.className = '';
+    }
+
+    function moveGuide(e) {
+      document.getElementById('a11y-reading-guide').style.top = (e.clientY - 16) + 'px';
+    }
+
+    window.a11yFontSize = function(dir) {
+      fontLevel = Math.max(-5, Math.min(10, fontLevel + dir));
+      document.documentElement.style.fontSize = (16 + fontLevel * 2) + 'px';
+    };
+    window.a11yZoom = function(dir) {
+      zoomLevel = Math.max(-4, Math.min(6, zoomLevel + dir));
+      document.documentElement.style.zoom = (1 + zoomLevel * 0.1).toFixed(1);
+    };
+    window.a11yClose = function() {
+      document.getElementById('a11y-panel').hidden = true;
+      document.getElementById('a11y-btn').setAttribute('aria-expanded','false');
+      document.getElementById('a11y-btn').focus();
+    };
+
+    document.getElementById('a11y-btn').addEventListener('click', function() {
+      var panel = document.getElementById('a11y-panel');
+      if (!panel.hidden) { a11yClose(); return; }
+      panel.hidden = false;
+      this.setAttribute('aria-expanded','true');
+      var first = panel.querySelector('.a11y-opt');
+      if (first) first.focus();
+    });
+
+    document.querySelectorAll('.a11y-opt[data-a]').forEach(function(btn) {
+      btn.addEventListener('click', function() { toggle(this.getAttribute('data-a')); });
+    });
+
+    document.addEventListener('keydown', function(e) {
+      var panel = document.getElementById('a11y-panel');
+      if (e.key === 'Escape' && panel && !panel.hidden) { a11yClose(); return; }
+      if (!panel || panel.hidden) return;
+      var dirs = { ArrowRight: -1, ArrowLeft: 1, ArrowUp: -6, ArrowDown: 6 };
+      if (dirs[e.key] !== undefined) {
+        var btns = Array.from(panel.querySelectorAll('.a11y-opt'));
+        var idx = btns.indexOf(document.activeElement);
+        if (idx === -1) return;
+        var next = Math.max(0, Math.min(btns.length - 1, idx + dirs[e.key]));
+        btns[next].focus(); e.preventDefault();
+      }
+    });
+
+    document.addEventListener('click', function(e) {
+      var panel = document.getElementById('a11y-panel');
+      var btn = document.getElementById('a11y-btn');
+      if (panel && !panel.hidden && !panel.contains(e.target) && !btn.contains(e.target)) a11yClose();
+    });
+  })();
+  </script>
+
 </body>
 </html>
