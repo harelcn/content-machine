@@ -857,7 +857,7 @@
   <nav id="nav">
     <div class="container nav-inner">
       <div class="nav-logo">Content Machine<em> | AI UGC</em></div>
-      <a href="#pricing" class="btn btn-ghost">אני בפנים</a>
+      <a href="https://my.schooler.biz/s/109519/1770273554967/lbdUjdo" target="_blank" rel="noopener" class="btn btn-ghost">אני בפנים</a>
     </div>
   </nav>
 
@@ -877,7 +877,7 @@
         בלי לצלם, בלי לשלם ליוצרים, ובלי להיות תלויים באף אחד
       </p>
       <div class="hero-actions reveal delay-3">
-        <a href="#pricing" class="btn btn-primary lg">אני בפנים — ₪297</a>
+        <a href="https://my.schooler.biz/s/109519/1770273554967/lbdUjdo" target="_blank" rel="noopener" class="btn btn-primary lg">אני בפנים — ₪297</a>
         <a href="#curriculum" class="btn btn-ghost">ראו את תוכן הקורס</a>
       </div>
       <p class="hero-note reveal delay-4"><i class="fa-solid fa-circle-check" style="color:var(--wine-light);margin-left:0.35rem;"></i>תוצאות תוך 24 שעות — מובטח</p>
@@ -1250,7 +1250,7 @@
           <input type="checkbox" id="policy-agree">
           <label for="policy-agree">אני מאשר את <a href="מדיניות/privacy-policy-ai-course.md.pdf" target="_blank" class="policy-link">מדיניות הפרטיות</a> וה<a href="מדיניות/cancellation-policy-ai-course.md.pdf" target="_blank" class="policy-link">ביטולים</a></label>
         </div>
-        <a href="#" class="btn btn-primary lg full">הצטרפו עכשיו — אני בפנים</a>
+        <a href="https://my.schooler.biz/s/109519/1770273554967/lbdUjdo" target="_blank" rel="noopener" class="btn btn-primary lg full" id="purchaseBtn">הצטרפו עכשיו — אני בפנים</a>
         <p class="price-note">תשלום מאובטח · גישה מיידית · תמיכה בעברית</p>
       </div>
     </div>
@@ -1287,7 +1287,7 @@
     <div class="container">
       <h2 class="reveal">תוך 24 שעות אתם כבר יכולים להיות שם</h2>
       <p class="reveal delay-1">90% מהשוק עוד לא שם. השאלה היא האם תהיו בצד הנכון</p>
-      <a href="#pricing" class="btn btn-primary lg reveal delay-2">כן, אני רוצה — אני בפנים</a>
+      <a href="https://my.schooler.biz/s/109519/1770273554967/lbdUjdo" target="_blank" rel="noopener" class="btn btn-primary lg reveal delay-2">כן, אני רוצה — אני בפנים</a>
     </div>
   </section>
 
@@ -1298,10 +1298,23 @@
 
   <!-- MOBILE STICKY -->
   <div class="sticky-bar" id="stickyBar">
-    <a href="#pricing" class="btn btn-primary full">אני בפנים — ₪297 בלבד</a>
+    <a href="https://my.schooler.biz/s/109519/1770273554967/lbdUjdo" target="_blank" rel="noopener" class="btn btn-primary full">אני בפנים — ₪297 בלבד</a>
   </div>
 
   <script>
+    /* ===== POLICY GATE FOR PURCHASE ===== */
+    var purchaseBtn = document.getElementById('purchaseBtn');
+    if (purchaseBtn) {
+      purchaseBtn.addEventListener('click', function(e) {
+        var agree = document.getElementById('policy-agree');
+        if (agree && !agree.checked) {
+          e.preventDefault();
+          alert('יש לאשר את מדיניות הפרטיות והביטולים לפני המעבר לתשלום');
+          agree.focus();
+        }
+      });
+    }
+
     /* ===== REVEAL ON SCROLL ===== */
     var allReveal = document.querySelectorAll('.reveal');
 
