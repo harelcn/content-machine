@@ -1302,19 +1302,6 @@
   </div>
 
   <script>
-    /* ===== POLICY GATE FOR PURCHASE ===== */
-    var purchaseBtn = document.getElementById('purchaseBtn');
-    if (purchaseBtn) {
-      purchaseBtn.addEventListener('click', function(e) {
-        var agree = document.getElementById('policy-agree');
-        if (agree && !agree.checked) {
-          e.preventDefault();
-          alert('יש לאשר את מדיניות הפרטיות והביטולים לפני המעבר לתשלום');
-          agree.focus();
-        }
-      });
-    }
-
     /* ===== REVEAL ON SCROLL ===== */
     var allReveal = document.querySelectorAll('.reveal');
 
